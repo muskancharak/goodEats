@@ -7,13 +7,13 @@ import bcrypt from "bcrypt";
  export  const createAdmin = async () => {
   const existingAdmin = await Model.User.findOne({ role: "ADMIN" });
   if (!existingAdmin) {
-    const hashedPassword = await bcrypt.hash("admin123", 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
     const admin = new Model.User({
-      userName: "Super Admin",
-      email: "admin@example.com",
+      userName,
+      email,
       password: hashedPassword,
       role: "ADMIN",
-      phoneNumber :"1234567656"
+      phoneNumber,
     });
     await admin.save();
     console.log("✅ Admin created:", admin.email);
